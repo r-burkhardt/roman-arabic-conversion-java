@@ -36,8 +36,8 @@ public class RomanNumeralConversion {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JPanel mainPanel = new JPanel(new BorderLayout());
-        romanToArabicRadio = new JRadioButton("Roman to Arabic");
-        arabicToRomanRadio = new JRadioButton("Arabic to Roman");
+        romanToArabicRadio = new JRadioButton("Roman to Arabic\nMax: MMMCMXCIX");
+        arabicToRomanRadio = new JRadioButton("Arabic to Roman\nMax: 2147483647");
         
         ButtonGroup selectConversionGroup = new ButtonGroup();
         selectConversionGroup.add(romanToArabicRadio);
@@ -56,9 +56,9 @@ public class RomanNumeralConversion {
         contentPanel.add(innerContentPanel);
         
         JLabel inputLabel = new JLabel("Enter your input here:");
-        inputField = new JTextField();
+        inputField = new JTextField("", 20);
         JLabel ouputLabel = new JLabel("Your converted input:");
-        outputField = new JTextField();
+        outputField = new JTextField("", 20);
         outputField.setEditable(false);
         
         innerContentPanel.add(inputLabel);
@@ -217,156 +217,192 @@ public class RomanNumeralConversion {
 	// loops through the inArabicNum creating a roman numeral string to be sent back to main
 	do
 	{
-		if (inArabicNum > 2999)
-		{
-			outRomanNum = outRomanNum + 'M';
-			inArabicNum = inArabicNum - 1000;
-		}
-		else if (inArabicNum < 3000 && inArabicNum > 1999)
-		{
-			outRomanNum = outRomanNum + 'M';
-			inArabicNum = inArabicNum - 1000;
-		}
-		else if (inArabicNum < 2000 && inArabicNum > 999)
-		{
-			outRomanNum = outRomanNum + 'M';
-			inArabicNum = inArabicNum - 1000;
-		}
-		else if (inArabicNum < 1000 && inArabicNum > 899)
-		{
-			outRomanNum = outRomanNum + "CM";
-			inArabicNum = inArabicNum - 900;
-		}
-		else if (inArabicNum < 900 && inArabicNum > 799)
-		{
-			outRomanNum = outRomanNum + "DCCC";
-			inArabicNum = inArabicNum - 800;
-		}
-		else if (inArabicNum < 800 && inArabicNum > 699)
-		{
-			outRomanNum = outRomanNum + "DCC";
-			inArabicNum = inArabicNum - 700;
-		}
-		else if (inArabicNum < 700 && inArabicNum > 599)
-		{
-			outRomanNum = outRomanNum + "DC";
-			inArabicNum = inArabicNum - 600;
-		}
-		else if (inArabicNum < 600 && inArabicNum > 499)
-		{
-			outRomanNum = outRomanNum + 'D';
-			inArabicNum = inArabicNum - 500;
-		}
-		else if (inArabicNum < 500 && inArabicNum > 399)
-		{
-			outRomanNum = outRomanNum + "CD";
-			inArabicNum = inArabicNum - 400;
-		}
-		else if (inArabicNum < 400 && inArabicNum > 299)
-		{
-			outRomanNum = outRomanNum + "CCC";
-			inArabicNum = inArabicNum - 300;
-		}
-		else if (inArabicNum < 300 && inArabicNum > 199)
-		{
-			outRomanNum = outRomanNum + "CC";
-			inArabicNum = inArabicNum - 200;
-		}
-		else if (inArabicNum < 200 && inArabicNum > 99)
-		{
-			outRomanNum = outRomanNum + 'C';
-			inArabicNum = inArabicNum - 100;
-		}
-		else if (inArabicNum < 100 && inArabicNum > 89)
-		{
-			outRomanNum = outRomanNum + "XC";
-			inArabicNum = inArabicNum - 90;
-		}
-		else if (inArabicNum < 90 && inArabicNum > 79)
-		{
-			outRomanNum = outRomanNum + "LXXX";
-			inArabicNum = inArabicNum - 80;
-		}
-		else if (inArabicNum < 80 && inArabicNum > 69)
-		{
-			outRomanNum = outRomanNum + "LXX";
-			inArabicNum = inArabicNum - 70;
-		}
-		else if (inArabicNum < 70 && inArabicNum > 59)
-		{
-			outRomanNum = outRomanNum + "LX";
-			inArabicNum = inArabicNum - 60;
-		}
-		else if (inArabicNum < 60 && inArabicNum > 49)
-		{
-			outRomanNum = outRomanNum + 'L';
-			inArabicNum = inArabicNum - 50;
-		}
-		else if (inArabicNum < 50 && inArabicNum > 39)
-		{
-			outRomanNum = outRomanNum + "XL";
-			inArabicNum = inArabicNum - 40;
-		}
-		else if (inArabicNum < 40 && inArabicNum > 29)
-		{
-			outRomanNum = outRomanNum + "XXX";
-			inArabicNum = inArabicNum - 30;
-		}
-		else if (inArabicNum < 30 && inArabicNum > 19)
-		{
-			outRomanNum = outRomanNum + "XX";
-			inArabicNum = inArabicNum - 20;
-		}
-		else if (inArabicNum < 20 && inArabicNum > 9)
-		{
-			outRomanNum = outRomanNum + 'X';
-			inArabicNum = inArabicNum - 10;
-		}
-		else if (inArabicNum == 9)
-		{
-			outRomanNum = outRomanNum + "IX";
-			inArabicNum = inArabicNum - 9;
-		}
-		else if (inArabicNum == 8)
-		{
-			outRomanNum = outRomanNum + "VIII";
-			inArabicNum = inArabicNum - 8;
-		}
-		else if (inArabicNum == 7)
-		{
-			outRomanNum = outRomanNum + "VII";
-			inArabicNum = inArabicNum - 7;
-		}
-		else if (inArabicNum == 6)
-		{
-			outRomanNum = outRomanNum + "VI";
-			inArabicNum = inArabicNum - 6;
-		}
-		else if (inArabicNum == 5)
-		{
-			outRomanNum = outRomanNum + 'V';
-			inArabicNum = inArabicNum - 5;
-		}
-		else if (inArabicNum == 4)
-		{
-			outRomanNum = outRomanNum + "IV";
-			inArabicNum = inArabicNum - 4;
-		}
-		else if (inArabicNum == 3)
-		{
-			outRomanNum = outRomanNum + "III";
-			inArabicNum = inArabicNum - 3;
-		}
-		else if (inArabicNum == 2)
-		{
-			outRomanNum = outRomanNum + "II";
-			inArabicNum = inArabicNum - 2;
-		}
-		else if (inArabicNum == 1)
-		{
-			outRomanNum = outRomanNum + 'I';
-			inArabicNum = inArabicNum - 1;
-		}
+            if (inArabicNum >= 1000000000 && inArabicNum <= 2147483647)
+            {
+                outRomanNum = outRomanNum + "M\u033F";
+                inArabicNum = inArabicNum - 1000000000;
+            }
+            else if (inArabicNum >= 900000000 && inArabicNum < 1000000000)
+            {
+                outRomanNum = outRomanNum + "C\u033FM\u033F";
+                inArabicNum = inArabicNum - 900000000;
+            }
+            else if (inArabicNum >= 500000000 && inArabicNum < 900000000)
+            {
+                outRomanNum = outRomanNum + "D\u033F";
+                inArabicNum = inArabicNum - 500000000;
+            }
+            else if (inArabicNum >= 400000000 && inArabicNum < 500000000)
+            {
+                outRomanNum = outRomanNum + "C\u033FD\u033F";
+                inArabicNum = inArabicNum - 400000000;
+            }
+            else if (inArabicNum >= 100000000 && inArabicNum < 400000000)
+            {
+                outRomanNum = outRomanNum + "C\u033F";
+                inArabicNum = inArabicNum - 100000000;
+            }
+            else if (inArabicNum >= 90000000 && inArabicNum < 100000000)
+            {
+                outRomanNum = outRomanNum + "X\u033FC\u033F";
+                inArabicNum = inArabicNum - 90000000;
+            }
+            else if (inArabicNum >= 50000000 && inArabicNum < 90000000)
+            {
+                outRomanNum = outRomanNum + "L\u033F";
+                inArabicNum = inArabicNum - 50000000;
+            }
+            else if (inArabicNum >= 40000000 && inArabicNum < 50000000)
+            {
+                outRomanNum = outRomanNum + "X\u033FL\u033F";
+                inArabicNum = inArabicNum - 40000000;
+            }
+            else if (inArabicNum > 9999999 && inArabicNum < 40000000)
+            {
+                outRomanNum = outRomanNum + "X\u033F";
+                inArabicNum = inArabicNum - 10000000;
+            }
+            else if (inArabicNum > 8999999 && inArabicNum < 10000000)
+            {
+                outRomanNum = outRomanNum + "M\u0305X\u033F";
+                inArabicNum = inArabicNum - 9000000;
+            }
+            else if (inArabicNum > 4999999 && inArabicNum < 9000000)
+            {
+                outRomanNum = outRomanNum + "V\u033F";
+                inArabicNum = inArabicNum - 5000000;
+            }
+            else if (inArabicNum > 3999999 && inArabicNum < 5000000)
+            {
+                outRomanNum = outRomanNum + "M\u0305V\u033F";
+                inArabicNum = inArabicNum - 4000000;
+            }
+            else if (inArabicNum > 999999 && inArabicNum < 4000000)
+            {
+                outRomanNum = outRomanNum + "M\u0305";
+                inArabicNum = inArabicNum - 1000000;
+            }
+            if (inArabicNum > 899999 && inArabicNum < 1000000)
+            {
+                outRomanNum = outRomanNum + "C\u0305M\u0305";
+                inArabicNum = inArabicNum - 900000;
+            }
+            else if (inArabicNum > 499999 && inArabicNum < 900000)
+            {
+                outRomanNum = outRomanNum + "D\u0305";
+                inArabicNum = inArabicNum - 500000;
+            }
+            else if (inArabicNum > 399999 && inArabicNum < 500000)
+            {
+                outRomanNum = outRomanNum + "C\u0305D\u0305";
+                inArabicNum = inArabicNum - 400000;
+            }
+            else if (inArabicNum > 99999 && inArabicNum < 400000)
+            {
+                outRomanNum = outRomanNum + "C\u0305";
+                inArabicNum = inArabicNum - 100000;
+            }
+            else if (inArabicNum > 89999 && inArabicNum < 100000)
+            {
+                outRomanNum = outRomanNum + "X\u0305C\u0305";
+                inArabicNum = inArabicNum - 90000;
+            }
+            else if (inArabicNum > 49999 && inArabicNum < 90000)
+            {
+                outRomanNum = outRomanNum + "L\u0305";
+                inArabicNum = inArabicNum - 50000;                 
+            }
+            else if (inArabicNum > 39999 && inArabicNum < 50000)
+            {
+                outRomanNum = outRomanNum + "X\u0305L\u0305";
+                inArabicNum = inArabicNum - 40000;
+            }
+            else if (inArabicNum > 9999 && inArabicNum < 40000)
+            {
+                outRomanNum = outRomanNum + "X\u0305";
+                inArabicNum = inArabicNum - 10000;
+            }
+            else if (inArabicNum > 8999 && inArabicNum < 10000)
+            {
+                outRomanNum = outRomanNum + "MX\u0305";
+                inArabicNum = inArabicNum -9000;
+            }
+            else if (inArabicNum > 4999 && inArabicNum < 9000)
+            {
+                outRomanNum = outRomanNum + "V\u0305";
+                inArabicNum = inArabicNum - 5000;
+            }
+            else if (inArabicNum > 3999 && inArabicNum < 5000)
+            {
+                outRomanNum = outRomanNum + "MV\u0305";
+                inArabicNum = inArabicNum - 4000;
+            }
+            else if (inArabicNum < 4000 && inArabicNum > 999)
+            {
+                outRomanNum = outRomanNum + 'M';
+                inArabicNum = inArabicNum - 1000;
+            }
+            else if (inArabicNum < 1000 && inArabicNum > 899)
+            {
+                outRomanNum = outRomanNum + "CM";
+                inArabicNum = inArabicNum - 900;
+            }
+            else if (inArabicNum < 900 && inArabicNum > 499)
+            {
+                outRomanNum = outRomanNum + 'D';
+                inArabicNum = inArabicNum - 500;
+            }
+            else if (inArabicNum < 500 && inArabicNum > 399)
+            {
+                outRomanNum = outRomanNum + "CD";
+                inArabicNum = inArabicNum - 400;
+            }
+            else if (inArabicNum < 400 && inArabicNum > 99)
+            {
+                outRomanNum = outRomanNum + 'C';
+                inArabicNum = inArabicNum - 100;
+            }
+            else if (inArabicNum < 100 && inArabicNum > 89)
+            {
+                outRomanNum = outRomanNum + "XC";
+                inArabicNum = inArabicNum - 90;
+            }
+            else if (inArabicNum < 90 && inArabicNum > 49)
+            {
+                outRomanNum = outRomanNum + 'L';
+                inArabicNum = inArabicNum - 50;
+            }
+            else if (inArabicNum < 50 && inArabicNum > 39)
+            {
+                outRomanNum = outRomanNum + "XL";
+                inArabicNum = inArabicNum - 40;
+            }
+            else if (inArabicNum < 40 && inArabicNum > 9)
+            {
+                outRomanNum = outRomanNum + 'X';
+                inArabicNum = inArabicNum - 10;
+            }
+            else if (inArabicNum == 9)
+            {
+                outRomanNum = outRomanNum + "IX";
+                inArabicNum = inArabicNum - 9;
+            }
+            else if (inArabicNum >= 5 && inArabicNum < 9)
+            {
+                outRomanNum = outRomanNum + 'V';
+                inArabicNum = inArabicNum - 5;
+            }
+            else if (inArabicNum == 4)
+            {
+                outRomanNum = outRomanNum + "IV";
+                inArabicNum = inArabicNum - 4;
+            }
+            else if (inArabicNum > 0 && inArabicNum <= 3)
+            {
+                outRomanNum = outRomanNum + 'I';
+                inArabicNum = inArabicNum - 1;
+            }
+            System.out.println(outRomanNum);
 	} while (inArabicNum != 0);
 		
 	// returns the roman numeral string to main
