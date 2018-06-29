@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,31 +31,64 @@ public class RomanNumeralConversion {
     public static JRadioButton romanToArabicRadio, arabicToRomanRadio;
     public static JTextField inputField, outputField;
     public static String inuputString;
-    public static JButton convertButton;
+    public static JButton overlineV, overlineX, overlineL, overlineC, overlineD, overlineM, doubleOverlineV, doubleOverlineX, doubleOverlineL, doubleOverlineC, doubleOverlineD, doubleOverlineM, convertButton;
+    public static int arabicTotal;
     
     public static void main(String[] args) {
         frame = new JFrame("Roman Numeral Conversion");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JPanel mainPanel = new JPanel(new BorderLayout());
-        romanToArabicRadio = new JRadioButton("Roman to Arabic\nMax: MMMCMXCIX");
-        arabicToRomanRadio = new JRadioButton("Arabic to Roman\nMax: 2147483647");
+        romanToArabicRadio = new JRadioButton("Roman to Arabic");
+        arabicToRomanRadio = new JRadioButton("Arabic to Roman");
+        JLabel romanMaxLabel = new JLabel("Max: M̿M̿C̿X̿L̿V̿M̅M̅C̅D̅L̅X̅X̅X̅MMMDCXLVII");
+        JLabel arabicMaxLabel = new JLabel("Max: 2147483647");
         
         ButtonGroup selectConversionGroup = new ButtonGroup();
         selectConversionGroup.add(romanToArabicRadio);
         selectConversionGroup.add(arabicToRomanRadio);
         
-        JPanel radioPanel = new JPanel(new GridLayout(1, 2));
+        JPanel radioPanel = new JPanel(new GridLayout(2, 2));
         radioPanel.add(romanToArabicRadio);
         radioPanel.add(arabicToRomanRadio);
+        radioPanel.add(romanMaxLabel);
+        radioPanel.add(arabicMaxLabel);
         romanToArabicRadio.setSelected(true);
         mainPanel.add(radioPanel, BorderLayout.NORTH);
         
         JPanel contentPanel = new JPanel();
         mainPanel.add(contentPanel, BorderLayout.CENTER);
         
-        JPanel innerContentPanel = new JPanel(new GridLayout(4, 1));
-        contentPanel.add(innerContentPanel);
+        JPanel leftContentPanel = new JPanel(new GridLayout(4, 3));
+        contentPanel.add(leftContentPanel, BorderLayout.EAST);
+        
+        overlineV = new JButton("V\u0305");
+        leftContentPanel.add(overlineV);
+        overlineX = new JButton("X\u0305");
+        leftContentPanel.add(overlineX);
+        overlineL = new JButton("L\u0305");
+        leftContentPanel.add(overlineL);
+        overlineC = new JButton("C\u0305");
+        leftContentPanel.add(overlineC);
+        overlineD = new JButton("D\u0305");
+        leftContentPanel.add(overlineD);
+        overlineM = new JButton("M\u0305");
+        leftContentPanel.add(overlineM);
+        doubleOverlineV = new JButton("V\u033F");
+        leftContentPanel.add(doubleOverlineV);
+        doubleOverlineX = new JButton("X\u033F");
+        leftContentPanel.add(doubleOverlineX);
+        doubleOverlineL = new JButton("L\u033F");
+        leftContentPanel.add(doubleOverlineL);
+        doubleOverlineC = new JButton("C\u033F");
+        leftContentPanel.add(doubleOverlineC);
+        doubleOverlineD = new JButton("D\u033F");
+        leftContentPanel.add(doubleOverlineD);
+        doubleOverlineM = new JButton("M\u033F");
+        leftContentPanel.add(doubleOverlineM);
+        
+        JPanel rightContentPanel = new JPanel(new GridLayout(4, 1));
+        contentPanel.add(rightContentPanel, BorderLayout.WEST);
         
         JLabel inputLabel = new JLabel("Enter your input here:");
         inputField = new JTextField("", 20);
@@ -61,10 +96,10 @@ public class RomanNumeralConversion {
         outputField = new JTextField("", 20);
         outputField.setEditable(false);
         
-        innerContentPanel.add(inputLabel);
-        innerContentPanel.add(inputField);
-        innerContentPanel.add(ouputLabel);
-        innerContentPanel.add(outputField);
+        rightContentPanel.add(inputLabel);
+        rightContentPanel.add(inputField);
+        rightContentPanel.add(ouputLabel);
+        rightContentPanel.add(outputField);
         
         JPanel buttonPanel = new JPanel(new GridLayout(1,1));
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -75,11 +110,23 @@ public class RomanNumeralConversion {
         
         ButtonListener buttonListen = new ButtonListener();
         convertButton.addActionListener(buttonListen);
+        overlineV.addActionListener(buttonListen);
+        overlineX.addActionListener(buttonListen);
+        overlineL.addActionListener(buttonListen);
+        overlineC.addActionListener(buttonListen);
+        overlineD.addActionListener(buttonListen);
+        overlineM.addActionListener(buttonListen);
+        doubleOverlineV.addActionListener(buttonListen);
+        doubleOverlineX.addActionListener(buttonListen);
+        doubleOverlineL.addActionListener(buttonListen);
+        doubleOverlineC.addActionListener(buttonListen);
+        doubleOverlineD.addActionListener(buttonListen);
+        doubleOverlineM.addActionListener(buttonListen);
         
         frame.getContentPane().add(mainPanel);
         
         frame.pack();
-        frame.setSize(400, 200);
+        frame.setSize(600, 350);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         
@@ -100,7 +147,7 @@ public class RomanNumeralConversion {
                     {
                         //String output = romanToArabic(inputField.getText());
                         //System.out.println(output);
-                        outputField.setText(romanToArabic(inputField.getText()));
+                        outputField.setText(Integer.toString(romanToArabic(inputField.getText())));
                     }
                     else 
                     {
@@ -126,6 +173,54 @@ public class RomanNumeralConversion {
                     JOptionPane.showMessageDialog(null, message);                    
                 }
             }
+            else if (event.getSource() == overlineV)
+            {
+                inputField.setText(inputField.getText() + "V\u0305");
+            }
+            else if (event.getSource() == overlineX)
+            {
+                inputField.setText(inputField.getText() + "X\u0305");
+            }
+            else if (event.getSource() == overlineL)
+            {
+                inputField.setText(inputField.getText() + "L\u0305");
+            }
+            else if (event.getSource() == overlineC)
+            {
+                inputField.setText(inputField.getText() + "C\u0305");
+            }
+            else if (event.getSource() == overlineD)
+            {
+                inputField.setText(inputField.getText() + "D\u0305");
+            }
+            else if (event.getSource() == overlineM)
+            {
+                inputField.setText(inputField.getText() + "M\u0305");
+            }
+            else if (event.getSource() == doubleOverlineV)
+            {
+                inputField.setText(inputField.getText() + "V\u033F");
+            }
+            else if (event.getSource() == doubleOverlineX)
+            {
+                inputField.setText(inputField.getText() + "X\u033F");
+            }
+            else if (event.getSource() == doubleOverlineL)
+            {
+                inputField.setText(inputField.getText() + "L\u033F");
+            }
+            else if (event.getSource() == doubleOverlineC)
+            {
+                inputField.setText(inputField.getText() + "C\u033F");
+            }
+            else if (event.getSource() == doubleOverlineD)
+            {
+                inputField.setText(inputField.getText() + "D\u033F");
+            }
+            else if (event.getSource() == doubleOverlineM)
+            {
+                inputField.setText(inputField.getText() + "M\u033F");
+            }
         }
 
         
@@ -135,10 +230,12 @@ public class RomanNumeralConversion {
     {
         inputTest = inputTest.toUpperCase();
 
-        for (int i = 0; i < inputTest.length(); i++)
+        for (int i = 0; i < inputTest.length()-1; i++)
         {
+            //String test = String.valueOf(inputTest.charAt(i));
             char test = inputTest.charAt(i);
-            if ((test != 'I') && (test != 'V') && (test != 'X') && (test != 'L') && (test != 'C') && (test != 'D') && (test != 'M'))
+            //System.out.println(test);
+            if ((test != 'I') && (test != 'V') && (test != 'X') && (test != 'L') && (test != 'C') && (test != 'D') && (test != 'M') && (test != '\u0305') && (test != '\u033F'))
             {
                 return false;
             }
@@ -153,7 +250,7 @@ public class RomanNumeralConversion {
         {
             if (Character.isLetter(inputTest.charAt(i)))
             {
-                System.out.println(inputTest.charAt(i));
+                //System.out.println(inputTest.charAt(i));
                 return false;
             }
         }
@@ -161,56 +258,139 @@ public class RomanNumeralConversion {
         return true;
     }
     
-    public static String romanToArabic(String romanIn)
+    public static int romanToArabic(String romanString)
+    {
+        int arabicTotal = 0;
+        
+        romanString = romanString.toUpperCase();
+        
+        //int i = (romanString.length() - 1);
+        //System.out.println(romanString);
+        
+        List<Integer> arabicNumbers = new ArrayList<>(); 
+        
+        for (int i = 0; i < romanString.length()-1; i++)
+        {
+            if (romanString.charAt(i+1) == '\u0305')
+            {
+                //System.out.println(returnArabic(romanString.charAt(i)) * 1000);
+                arabicNumbers.add(returnArabic(romanString.charAt(i)) * 1000);
+                i++;
+            }
+            else if (romanString.charAt(i+1) == '\u033F')
+            {
+                //System.out.println(returnArabic(romanString.charAt(i)) * 1000000);
+                arabicNumbers.add(returnArabic(romanString.charAt(i)) * 1000000);
+                i++;
+            }
+            else 
+            {
+                //System.out.println(returnArabic(romanString.charAt(i)));
+                arabicNumbers.add(returnArabic(romanString.charAt(i)));
+            }
+        }
+        arabicNumbers.add(returnArabic(romanString.charAt(romanString.length()-1)));
+        
+        for (int j = 0; j < arabicNumbers.size()-1; j++)
+        {
+            if (arabicNumbers.get(j) < arabicNumbers.get(j + 1))
+            {
+                arabicTotal = arabicTotal - arabicNumbers.get(j);
+            }
+            else
+            {
+                arabicTotal = arabicTotal + arabicNumbers.get(j);
+            }
+        }
+        arabicTotal = arabicTotal + arabicNumbers.get(arabicNumbers.size()-1);
+        
+        return arabicTotal;
+    }
+    
+    public static int returnArabic(char romanChar)
+    {
+        switch (romanChar)
+        {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+    
+    /*public static int romanToArabic(String romanIn)
     {
         romanIn = romanIn.toUpperCase();
         
-        romanIn = romanIn + " ";
+        //romanIn = romanIn + " ";
         
         int romanTotal = 0;
         
-        char inRomanNum[] = romanIn.toCharArray();
+        //System.out.println(romanIn.length());
+        System.out.println(romanIn);
         
-        System.out.println(inRomanNum.length);
+        int i = romanIn.length() - 1;
         
-        for (int i = inRomanNum.length - 1; i >= 0; --i) {
-            /*if (inRomanNum[i] != 'I')*/
-            if ((inRomanNum[i] == 'I') && (inRomanNum[i + 1] == 'X')) {
+        //for (int i = romanIn.length() - 1; i >= 0; --i) {
+        while (i >= 0)
+        {            
+            
+            if (romanIn.charAt(i) == '\u0305')
+            {
+                romanTotal = romanTotal + (1000 * romanToArabic(String.valueOf(romanIn.charAt(i - 1))));
+                System.out.println(romanTotal);
+                i--;
+            }
+                
+            if ((romanIn.charAt(i) == 'I') && (romanIn.charAt(i + 1) == 'X')) {
                 romanTotal--;
-            } else if ((inRomanNum[i] == 'I') && (inRomanNum[i + 1] == 'V')) {
+            } else if ((romanIn.charAt(i) == 'I') && (romanIn.charAt(i + 1) == 'V')) {
                 romanTotal--;
-            } else if ((inRomanNum[i] == 'X') && (inRomanNum[i + 1] == 'L')) {
+            } else if ((romanIn.charAt(i) == 'X') && (romanIn.charAt(i + 1) == 'L')) {
                 romanTotal = romanTotal - 10;
-            } else if ((inRomanNum[i] == 'X') && (inRomanNum[i + 1] == 'C')) {
+            } else if ((romanIn.charAt(i) == 'X') && (romanIn.charAt(i + 1) == 'C')) {
                 romanTotal = romanTotal - 10;
-            } else if ((inRomanNum[i] == 'C') && (inRomanNum[i + 1] == 'D')) {
+            } else if ((romanIn.charAt(i) == 'C') && (romanIn.charAt(i + 1) == 'D')) {
                 romanTotal = romanTotal - 100;
-            } else if ((inRomanNum[i] == 'C') && (inRomanNum[i + 1] == 'M')) {
+            } else if ((romanIn.charAt(i) == 'C') && (romanIn.charAt(i + 1) == 'M')) {
                 romanTotal = romanTotal - 100;
-            } else if (inRomanNum[i] == 'I') {
+            } else if (romanIn.charAt(i) == 'I') {
                 romanTotal++;
-            } else if (inRomanNum[i] == 'V') {
+            } else if (romanIn.charAt(i) == 'V') {
                 romanTotal = romanTotal + 5;
-            } else if (inRomanNum[i] == 'X') {
+            } else if (romanIn.charAt(i) == 'X') {
                 romanTotal = romanTotal + 10;
-            } else if (inRomanNum[i] == 'L') {
+            } else if (romanIn.charAt(i) == 'L') {
                 romanTotal = romanTotal + 50;
-            } else if (inRomanNum[i] == 'C') {
+            } else if (romanIn.charAt(i) == 'C') {
                 romanTotal = romanTotal + 100;
-            } else if (inRomanNum[i] == 'D') {
+            } else if (romanIn.charAt(i) == 'D') {
                 romanTotal = romanTotal + 500;
-            } else if (inRomanNum[i] == 'M') {
+            } else if (romanIn.charAt(i) == 'M') {
                 romanTotal = romanTotal + 1000;
             }
-            System.out.println(inRomanNum[i]);
-        }
-        return Integer.toString(romanTotal);
-    }
+            System.out.println(romanIn.valueOf(romanIn.charAt(i)));
+            i--;
+        } //while (i >= 0);
+        return romanTotal;
+    }*/
     
     public static String arabicToRoman(String arabicIn)
     {
         int inArabicNum = Integer.parseInt(arabicIn);
-        System.out.println(inArabicNum);
+        //System.out.println(inArabicNum);
         
         String outRomanNum = "";
 	
@@ -339,7 +519,7 @@ public class RomanNumeralConversion {
             }
             else if (inArabicNum < 4000 && inArabicNum > 999)
             {
-                outRomanNum = outRomanNum + 'M';
+                outRomanNum = outRomanNum + "M";
                 inArabicNum = inArabicNum - 1000;
             }
             else if (inArabicNum < 1000 && inArabicNum > 899)
@@ -349,7 +529,7 @@ public class RomanNumeralConversion {
             }
             else if (inArabicNum < 900 && inArabicNum > 499)
             {
-                outRomanNum = outRomanNum + 'D';
+                outRomanNum = outRomanNum + "D";
                 inArabicNum = inArabicNum - 500;
             }
             else if (inArabicNum < 500 && inArabicNum > 399)
@@ -359,7 +539,7 @@ public class RomanNumeralConversion {
             }
             else if (inArabicNum < 400 && inArabicNum > 99)
             {
-                outRomanNum = outRomanNum + 'C';
+                outRomanNum = outRomanNum + "C";
                 inArabicNum = inArabicNum - 100;
             }
             else if (inArabicNum < 100 && inArabicNum > 89)
@@ -369,7 +549,7 @@ public class RomanNumeralConversion {
             }
             else if (inArabicNum < 90 && inArabicNum > 49)
             {
-                outRomanNum = outRomanNum + 'L';
+                outRomanNum = outRomanNum + "L";
                 inArabicNum = inArabicNum - 50;
             }
             else if (inArabicNum < 50 && inArabicNum > 39)
@@ -379,7 +559,7 @@ public class RomanNumeralConversion {
             }
             else if (inArabicNum < 40 && inArabicNum > 9)
             {
-                outRomanNum = outRomanNum + 'X';
+                outRomanNum = outRomanNum + "X";
                 inArabicNum = inArabicNum - 10;
             }
             else if (inArabicNum == 9)
@@ -389,7 +569,7 @@ public class RomanNumeralConversion {
             }
             else if (inArabicNum >= 5 && inArabicNum < 9)
             {
-                outRomanNum = outRomanNum + 'V';
+                outRomanNum = outRomanNum + "V";
                 inArabicNum = inArabicNum - 5;
             }
             else if (inArabicNum == 4)
@@ -399,10 +579,10 @@ public class RomanNumeralConversion {
             }
             else if (inArabicNum > 0 && inArabicNum <= 3)
             {
-                outRomanNum = outRomanNum + 'I';
+                outRomanNum = outRomanNum + "I";
                 inArabicNum = inArabicNum - 1;
             }
-            System.out.println(outRomanNum);
+            //System.out.println(outRomanNum);
 	} while (inArabicNum != 0);
 		
 	// returns the roman numeral string to main
